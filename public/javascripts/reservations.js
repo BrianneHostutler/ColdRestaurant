@@ -3,6 +3,11 @@ var express = require('express');
 
 /* GET users listing. */
 
+app.get('/', function (req, res) {
+  // res.send('hello');
+  res.render('home');
+
+});
 
 var tableReservation = [
     {
