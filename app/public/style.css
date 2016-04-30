@@ -1,8 +1,12 @@
 .jumbotron{
 	text-align: center;
+	background-color: #5bc0de;
 }
 .panel-body{
 	text-align: center;
+}
+#heading{
+	background-color: #f0ad4e;
 }
 .panel-default{
 	border: none;
