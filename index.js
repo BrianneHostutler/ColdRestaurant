@@ -3,9 +3,11 @@ var path = require('path');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
+var root = __dirname;
+
 
 var app = express();
-var PORT = 3000;
+var PORT = 3001;
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 
@@ -35,8 +37,8 @@ app.engine('handlebars', exphbs({
     extname: 'handlebars'
 }));
 
-// app.set('views', path.join(root, 'views'));
-// app.set('view engine', 'handlebars');
+app.set('views', path.join(root, '/views'));
+app.set('view engine', 'handlebars');
 
 app.get('/', function (req, res) {
   // res.send('hello');
