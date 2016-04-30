@@ -21,21 +21,6 @@ connection.connect(function(err){
 
 });
 
-var insertData = {customer_name: "My Name", customer_email: "me@me.com", phone_number: "112-334-5555"};
-
-connection.query("INSERT INTO customers SET ?",insertData, function(err, result){
-console.log(err);
-console.log("Insert successful");
-
-connection.query('SELECT * FROM customers', function(err, rows, fields){
-  if (err) throw err;
-
-  console.log(rows);
-//  console.log('The bears\'s are: ', rows[0].name);
-});
-
-})
-
 
 
 
@@ -54,6 +39,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.text());
 app.use(bodyParser.json({type:'application/vnd.api+json'}));
+app.use(myLogger);
 
 // app.use('/', routes);
 // app.use('/reservations', reservations);
@@ -79,6 +65,46 @@ app.get('/', function (req, res) {
 
 });
 
+app.get('/about-us', function (req, res) {
+  // res.send('hello');
+  res.render('about');
+
+});
+app.get('/contact-us', function (req, res) {
+  // res.send('hello');
+  res.render('contact');
+
+});
+
+
+app.post('/createRes', function (req, res) {
+  // res.send('hello');
+console.log(req.body.reserve_name);
+
+var insertData = {customer_name: req.body.reserve_name, customer_email: req.body.reserve_email, phone_number: req.body.reserve_phone};
+
+connection.query("INSERT INTO customers SET ?",insertData, function(err, result){
+console.log(err);
+console.log("Insert successful");
+
+connection.query('SELECT * FROM customers', function(err, rows, fields){
+  if (err) throw err;
+
+  console.log(rows);
+
+  res.render('home', { new_user: JSON.stringify(rows)});
+
+//  console.log('The bears\'s are: ', rows[0].name);
+});
+
+})
+
+
+
+
+});
+
+
 // error handlers
 
 // development error handler
@@ -102,6 +128,13 @@ app.get('/', function (req, res) {
 //     error: {}
 //   });
 // });
+
+function myLogger(req){
+//console.log(req);
+  console.log("Hello "+req.headers['user-agent']);
+//  req.next();
+
+}
 
 
 module.exports = app;
