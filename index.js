@@ -5,6 +5,39 @@ var bodyParser = require('body-parser');
 var exphbs = require('express-handlebars');
 var root = __dirname;
 
+var mysql = require("mysql");
+
+
+var connection = mysql.createConnection({
+  host     : 'localhost', //127.0.0.1
+  user     : 'root',
+  password : '',
+  database : 'resturants'
+});
+
+connection.connect(function(err){
+
+  console.log("Connection Started");
+
+});
+
+var insertData = {customer_name: "My Name", customer_email: "me@me.com", phone_number: "112-334-5555"};
+
+connection.query("INSERT INTO customers SET ?",insertData, function(err, result){
+console.log(err);
+console.log("Insert successful");
+
+connection.query('SELECT * FROM customers', function(err, rows, fields){
+  if (err) throw err;
+
+  console.log(rows);
+//  console.log('The bears\'s are: ', rows[0].name);
+});
+
+})
+
+
+
 
 var app = express();
 var PORT = 3001;
@@ -72,4 +105,3 @@ app.get('/', function (req, res) {
 
 
 module.exports = app;
-
