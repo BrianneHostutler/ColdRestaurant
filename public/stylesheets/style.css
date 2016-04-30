@@ -1,0 +1,23 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.jumbotron{
+  text-align: center;
+}
+.panel-body{
+  text-align: center;
+}
+.panel-default{
+  border: none;
+}
+footer{
+  border: none;
+}
+form{
+  text-align: left;
+}
